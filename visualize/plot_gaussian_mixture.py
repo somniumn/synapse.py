@@ -58,7 +58,6 @@ def plot_gmm(gmm, X, label=True, ax=None):
         draw_ellipse(pos, cov, alpha=w * w_factor)
 
 
-# sns.set_theme(style='whitegrid')
 plot_gmm(gmm, X)
 plt.grid()
 plt.show()
