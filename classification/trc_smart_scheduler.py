@@ -49,15 +49,18 @@ plt.grid()
 # plt.show()
 
 
+X_test_C = X_test.iloc[:, 1:9]
 # decision tree
 classifier = xgb.XGBClassifier(n_estimators=500, learning_rate=0.1, max_depth=4)
-classifier.fit(X_train, y_train)
-predict = classifier.predict(X_test)
+# classifier.fit(X_train, y_train)
+classifier.fit(X_train_C, y_train)
+# predict = classifier.predict(X_test)
+predict = classifier.predict(X_test_C)
 y_test = pd.Series.to_numpy(y_test)
 conf_matrix = confusion_matrix(y_test, predict, labels=[0, 1])
 print(conf_matrix)
 
-plot_confusion_matrix(classifier, X_test, y_test, display_labels=class_names, cmap=plt.cm.Blues)
+plot_confusion_matrix(classifier, X_test_C, y_test, display_labels=class_names, cmap=plt.cm.Blues)
 
 print("accuracy_score: {}".format(accuracy_score(y_test, predict)))
 print("precision_score: {}".format(precision_score(y_test, predict)))
