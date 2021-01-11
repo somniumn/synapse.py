@@ -64,3 +64,27 @@ DEBUG;2021-01-11 01:18:33;trainer.py;trainer;628;Retornando métricas via valida
 DEBUG;2021-01-11 01:18:33;trainer.py;trainer;628;Retornando métricas via validação cruzada para o modelo RandomForest
 DEBUG;2021-01-11 01:18:46;trainer.py;trainer;655;Modificando DataFrame de métricas para plotagem gráfica
 DEBUG;2021-01-11 01:18:46;trainer.py;trainer;668;Plotando análise gráfica das métricas para os modelos treinados
+DEBUG;2021-01-11 01:27:05;trainer.py;trainer;228;Treinando modelo LogisticRegression
+DEBUG;2021-01-11 01:27:05;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-11 01:27:08;trainer.py;trainer;228;Treinando modelo DecisionTrees
+DEBUG;2021-01-11 01:27:08;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-11 01:27:08;trainer.py;trainer;228;Treinando modelo RandomForest
+DEBUG;2021-01-11 01:27:08;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-11 01:27:12;trainer.py;trainer;292;Computando métricas do modelo LogisticRegression utilizando validação cruzada com 5 K-folds
+INFO;2021-01-11 01:27:12;trainer.py;trainer;324;Métricas computadas com sucesso nos dados de treino em 0.091 segundos
+DEBUG;2021-01-11 01:27:12;trainer.py;trainer;357;Computando métricas do modelo LogisticRegression utilizando dados de teste
+INFO;2021-01-11 01:27:12;trainer.py;trainer;386;Métricas computadas com sucesso nos dados de teste em 0.003 segundos
+DEBUG;2021-01-11 01:27:12;trainer.py;trainer;292;Computando métricas do modelo DecisionTrees utilizando validação cruzada com 5 K-folds
+INFO;2021-01-11 01:27:12;trainer.py;trainer;324;Métricas computadas com sucesso nos dados de treino em 0.039 segundos
+DEBUG;2021-01-11 01:27:12;trainer.py;trainer;357;Computando métricas do modelo DecisionTrees utilizando dados de teste
+INFO;2021-01-11 01:27:12;trainer.py;trainer;386;Métricas computadas com sucesso nos dados de teste em 0.003 segundos
+DEBUG;2021-01-11 01:27:12;trainer.py;trainer;292;Computando métricas do modelo RandomForest utilizando validação cruzada com 5 K-folds
+INFO;2021-01-11 01:27:27;trainer.py;trainer;324;Métricas computadas com sucesso nos dados de treino em 15.185 segundos
+DEBUG;2021-01-11 01:27:27;trainer.py;trainer;357;Computando métricas do modelo RandomForest utilizando dados de teste
+INFO;2021-01-11 01:27:27;trainer.py;trainer;386;Métricas computadas com sucesso nos dados de teste em 0.08 segundos
+DEBUG;2021-01-11 01:27:27;trainer.py;trainer;624;Iniciando plotagem gráfica das métricas dos classificadores
+DEBUG;2021-01-11 01:27:27;trainer.py;trainer;628;Retornando métricas via validação cruzada para o modelo LogisticRegression
+DEBUG;2021-01-11 01:27:27;trainer.py;trainer;628;Retornando métricas via validação cruzada para o modelo DecisionTrees
+DEBUG;2021-01-11 01:27:27;trainer.py;trainer;628;Retornando métricas via validação cruzada para o modelo RandomForest
+DEBUG;2021-01-11 01:27:39;trainer.py;trainer;655;Modificando DataFrame de métricas para plotagem gráfica
+DEBUG;2021-01-11 01:27:39;trainer.py;trainer;668;Plotando análise gráfica das métricas para os modelos treinados
