@@ -40,6 +40,21 @@ plot_double_donut_chart(df=df, col1='Pass / Fail', col2='Duplex', label_names_co
                         colors1=['crimson', 'navy'], colors2=['lightcoral', 'lightskyblue'],
                         title="Did the duplex influence on jam rate?")
 
+# Countplot for EosFull
+eosfull_colors = ['lightskyblue', 'lightcoral']
+eosfull_map = {'10': '10', '20': '20'}
+plot_countplot(df=df, col='Eos - Full', palette=eosfull_colors, label_names=eosfull_map,
+               title='Total Jam Case by Eos - Full')
+
+# Jam rate by Eos - Full
+plot_countplot(df=df, col='Pass / Fail', hue='Eos - Full', label_names=pass_map, palette=eosfull_colors,
+               title="Could duplex had some influence on Jam Error?")
+
+# Plotting a double donut chart
+plot_double_donut_chart(df=df, col1='Pass / Fail', col2='Eos - Full', label_names_col1=pass_map,
+                        colors1=['crimson', 'navy'], colors2=['lightcoral', 'lightskyblue'],
+                        title="Did the Eos - Full influence on jam rate?")
+
 
 # Distribution of EosVal variable
 plot_distplot(df=df, col='EosVal', title="EosVal Distribution")
