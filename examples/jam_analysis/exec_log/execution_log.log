@@ -1,0 +1,70 @@
+DEBUG;2021-01-19 01:27:28;trainer.py;trainer;228;Treinando modelo LogisticRegression
+DEBUG;2021-01-19 01:27:28;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:27:31;trainer.py;trainer;228;Treinando modelo DecisionTrees
+DEBUG;2021-01-19 01:27:31;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:27:31;trainer.py;trainer;228;Treinando modelo RandomForest
+DEBUG;2021-01-19 01:27:31;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:27:35;trainer.py;trainer;292;Computando métricas do modelo LogisticRegression utilizando validação cruzada com 5 K-folds
+ERROR;2021-01-19 01:27:35;trainer.py;trainer;329;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:27:35;trainer.py;trainer;357;Computando métricas do modelo LogisticRegression utilizando dados de teste
+ERROR;2021-01-19 01:27:35;trainer.py;trainer;391;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:28:35;trainer.py;trainer;228;Treinando modelo LogisticRegression
+DEBUG;2021-01-19 01:28:35;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:28:38;trainer.py;trainer;228;Treinando modelo DecisionTrees
+DEBUG;2021-01-19 01:28:38;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:28:39;trainer.py;trainer;228;Treinando modelo RandomForest
+DEBUG;2021-01-19 01:28:39;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:28:42;trainer.py;trainer;292;Computando métricas do modelo LogisticRegression utilizando validação cruzada com 5 K-folds
+ERROR;2021-01-19 01:28:42;trainer.py;trainer;329;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:28:42;trainer.py;trainer;357;Computando métricas do modelo LogisticRegression utilizando dados de teste
+ERROR;2021-01-19 01:28:42;trainer.py;trainer;391;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:33:52;trainer.py;trainer;228;Treinando modelo LogisticRegression
+DEBUG;2021-01-19 01:33:52;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:33:56;trainer.py;trainer;228;Treinando modelo DecisionTrees
+DEBUG;2021-01-19 01:33:56;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:33:56;trainer.py;trainer;228;Treinando modelo RandomForest
+DEBUG;2021-01-19 01:33:56;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:33:59;trainer.py;trainer;292;Computando métricas do modelo LogisticRegression utilizando validação cruzada com 5 K-folds
+ERROR;2021-01-19 01:33:59;trainer.py;trainer;329;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:33:59;trainer.py;trainer;357;Computando métricas do modelo LogisticRegression utilizando dados de teste
+ERROR;2021-01-19 01:33:59;trainer.py;trainer;391;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:35:54;trainer.py;trainer;228;Treinando modelo LogisticRegression
+DEBUG;2021-01-19 01:35:54;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:35:59;trainer.py;trainer;228;Treinando modelo DecisionTrees
+DEBUG;2021-01-19 01:35:59;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:35:59;trainer.py;trainer;228;Treinando modelo RandomForest
+DEBUG;2021-01-19 01:35:59;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:36:02;trainer.py;trainer;292;Computando métricas do modelo LogisticRegression utilizando validação cruzada com 5 K-folds
+ERROR;2021-01-19 01:36:02;trainer.py;trainer;329;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:36:02;trainer.py;trainer;357;Computando métricas do modelo LogisticRegression utilizando dados de teste
+ERROR;2021-01-19 01:36:02;trainer.py;trainer;391;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:36:23;trainer.py;trainer;228;Treinando modelo LogisticRegression
+DEBUG;2021-01-19 01:36:23;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:36:27;trainer.py;trainer;228;Treinando modelo DecisionTrees
+DEBUG;2021-01-19 01:36:27;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:36:27;trainer.py;trainer;228;Treinando modelo RandomForest
+DEBUG;2021-01-19 01:36:27;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:36:30;trainer.py;trainer;292;Computando métricas do modelo LogisticRegression utilizando validação cruzada com 5 K-folds
+ERROR;2021-01-19 01:36:30;trainer.py;trainer;329;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:36:30;trainer.py;trainer;357;Computando métricas do modelo LogisticRegression utilizando dados de teste
+ERROR;2021-01-19 01:36:30;trainer.py;trainer;391;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:37:07;trainer.py;trainer;228;Treinando modelo LogisticRegression
+DEBUG;2021-01-19 01:37:07;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:37:10;trainer.py;trainer;228;Treinando modelo DecisionTrees
+DEBUG;2021-01-19 01:37:10;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:37:10;trainer.py;trainer;228;Treinando modelo RandomForest
+DEBUG;2021-01-19 01:37:10;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:37:13;trainer.py;trainer;292;Computando métricas do modelo LogisticRegression utilizando validação cruzada com 5 K-folds
+ERROR;2021-01-19 01:37:13;trainer.py;trainer;329;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:37:13;trainer.py;trainer;357;Computando métricas do modelo LogisticRegression utilizando dados de teste
+ERROR;2021-01-19 01:37:13;trainer.py;trainer;391;Erro ao computar as métricas. Exception lançada: '<' not supported between instances of 'str' and 'int'
+DEBUG;2021-01-19 01:37:45;trainer.py;trainer;228;Treinando modelo LogisticRegression
+DEBUG;2021-01-19 01:37:45;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:37:49;trainer.py;trainer;228;Treinando modelo DecisionTrees
+DEBUG;2021-01-19 01:37:49;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:37:49;trainer.py;trainer;228;Treinando modelo RandomForest
+DEBUG;2021-01-19 01:37:49;trainer.py;trainer;240;Aplicando RandomizedSearchCV
+DEBUG;2021-01-19 01:37:52;trainer.py;trainer;292;Computando métricas do modelo LogisticRegression utilizando validação cruzada com 5 K-folds
+ERROR;2021-01-19 01:37:52;trainer.py;trainer;329;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')
+DEBUG;2021-01-19 01:37:52;trainer.py;trainer;357;Computando métricas do modelo LogisticRegression utilizando dados de teste
+ERROR;2021-01-19 01:37:52;trainer.py;trainer;391;Erro ao computar as métricas. Exception lançada: pos_label=1 is not a valid label: array(['0', '1'], dtype='<U1')

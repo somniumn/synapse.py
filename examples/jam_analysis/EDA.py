@@ -116,15 +116,17 @@ sns.kdeplot(df[df['Pass / Fail']=='1']['EosVal'], ax=ax, color='r', shade=True, 
 """
 
 """
-# Distribution of Exit - ID variable
-df['Exit - ID'] = df['Exit - ID'].replace('none', np.nan)
-df['Exit - ID'] = df['Exit - ID'].fillna(df['Exit - ID'].median())
+# Distribution of EXIT ID variable
+feature_name = 'EXIT ID'
+df[feature_name] = df[feature_name].replace('none', np.nan)
+df[feature_name] = df[feature_name].fillna(df[feature_name].median())
+print(f'Median value of {feature_name} : {df[feature_name].median()}')
 
-plot_distplot(df=df, col='Exit - ID', title="Exit - ID Distribution")
+plot_distplot(df=df, col=feature_name, title="EXIT ID Distribution")
 
-ax.set_title("Is there any relationship between Exit - ID distribution\n from jam and no jam case?", size=16)
-sns.kdeplot(df[df['Pass / Fail']=='0']['Exit - ID'], ax=ax, color='b', shade=True, Label='0')
-sns.kdeplot(df[df['Pass / Fail']=='1']['Exit - ID'], ax=ax, color='r', shade=True, Label='1')
+ax.set_title("Is there any relationship between EXIT ID distribution\n from jam and no jam case?", size=16)
+sns.kdeplot(df[df['Pass / Fail']=='0'][feature_name], ax=ax, color='b', shade=True, Label='0')
+sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=True, Label='1')
 """
 
 """
@@ -132,7 +134,6 @@ sns.kdeplot(df[df['Pass / Fail']=='1']['Exit - ID'], ax=ax, color='r', shade=Tru
 feature_name = 'IDInfo_ID'
 df[feature_name] = df[feature_name].replace('none', np.nan)
 df[feature_name] = df[feature_name].fillna(df[feature_name].median())
-
 print(f'Median value of {feature_name} : {df[feature_name].median()}')
 
 plot_distplot(df=df, col=feature_name, title="IDInfo_ID Distribution")
@@ -147,7 +148,6 @@ sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=Tr
 feature_name = 'ID - Eos'
 df[feature_name] = df[feature_name].replace('none', np.nan)
 df[feature_name] = df[feature_name].fillna(df[feature_name].median())
-
 print(f'Median value of {feature_name} : {df[feature_name].median()}')
 
 plot_distplot(df=df, col=feature_name, title="ID - Eos Distribution")
@@ -162,7 +162,6 @@ sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=Tr
 feature_name = 'Exit - ID'
 df[feature_name] = df[feature_name].replace('none', np.nan)
 df[feature_name] = df[feature_name].fillna(df[feature_name].median())
-
 print(f'Median value of {feature_name} : {df[feature_name].median()}')
 
 plot_distplot(df=df, col=feature_name, title="Exit - ID Distribution")
@@ -176,20 +175,21 @@ sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=Tr
 # Distribution of Del - Exit variable
 feature_name = 'Del - Exit'
 df[feature_name] = df[feature_name].replace('none', np.nan)
-# print(f'Missing value of {feature_name} : {df[feature_name].isna().sum()}, '
-#      f'None-NaN count : {df[feature_name].count()}')
 df[feature_name] = df[feature_name].fillna(df[feature_name].median())
-
 print(f'Median value of {feature_name} : {df[feature_name].median()}')
 
 plot_distplot(df=df, col=feature_name, title="Del - Exit Distribution")
 
 ax.set_title("Is there any relationship between Del - Exit distribution\n from jam and no jam case?", size=16)
 sns.kdeplot(df[df['Pass / Fail']=='0'][feature_name], ax=ax, color='b', shade=True, Label='0')
-# sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=True, Label='1')
+sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=True, Label='1')
 
 
-print(df)
+
+# print(df[df['Pass / Fail']=='0'][feature_name].count())
+# pd.set_option('display.max_rows', 500)
+# print(df[df['Pass / Fail']=='0'][feature_name])
+
 plt.show()
 
 
