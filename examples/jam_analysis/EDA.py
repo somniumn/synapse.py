@@ -17,6 +17,10 @@ TRAIN_FILENAME = 'Fin_H2-6703.csv'
 df = pd.read_csv(os.path.join(DATA_PATH, TRAIN_FILENAME))
 df.head()
 
+figsize = (10, 7)
+fig, ax = plt.subplots(figsize=figsize)
+format_spines(ax=ax, right_border=False)
+
 # Jam rate
 # df['Pass / Fail'] = df['Pass / Fail'].replace('none', '1')
 df['Pass / Fail'] = df['Pass / Fail'].replace('none', '0')
@@ -83,7 +87,7 @@ plot_countplot(df=df, col='Pass / Fail', hue='Eos >> ID', label_names=jam_map, p
                title="Could Eos >> ID had some influence on Jam Error?")
 """
 
-
+"""
 # Countplot for EosFull
 eosfull_colors = ['lightskyblue', 'lightcoral']
 eosfull_map = {'10': '10', '20': '20'}
@@ -98,44 +102,94 @@ plot_countplot(df=df, col='Pass / Fail', hue='Eos - Full', label_names=jam_map, 
 plot_double_donut_chart(df=df, col1='Pass / Fail', col2='Eos - Full', label_names_col1=jam_map,
                         colors1=['crimson', 'navy'], colors2=['lightcoral', 'lightskyblue'],
                         title="Did the Eos - Full influence on jam rate?")
+"""
 
-
+"""
 # Distribution of EosVal variable
 plot_distplot(df=df, col='EosVal', title="EosVal Distribution")
 
 # plot_distplot(df=df, col='EosVal', hue='Pass / Fail', kind='kde',
 #              title="Is there any relationship between EosVal distribution\n from jam and no jam case?")
-figsize = (10, 7)
-fig, ax = plt.subplots(figsize=figsize)
-format_spines(ax=ax, right_border=False)
 ax.set_title("Is there any relationship between EosVal distribution\n from jam and no jam case?", size=16)
 sns.kdeplot(df[df['Pass / Fail']=='0']['EosVal'], ax=ax, color='b', shade=True, Label='0')
 sns.kdeplot(df[df['Pass / Fail']=='1']['EosVal'], ax=ax, color='r', shade=True, Label='1')
+"""
 
-
-imputer = SimpleImputer(strategy='median')
-
-# Distribution of EosVal variable
+"""
+# Distribution of Exit - ID variable
 df['Exit - ID'] = df['Exit - ID'].replace('none', np.nan)
 df['Exit - ID'] = df['Exit - ID'].fillna(df['Exit - ID'].median())
 
-# df['Exit - ID'] = imputer.fit_transform(df['Exit - ID'])
+plot_distplot(df=df, col='Exit - ID', title="Exit - ID Distribution")
 
-plot_distplot(df=df, col='Exit - ID', title="Exit - ID Distribution", palette=['blue', 'orange'])
-
-# plot_distplot(df=df, col='Exit - ID', hue='Pass / Fail', kind='kde', color=['r', 'g'],
-#              title="Is there any relationship between Exit - ID distribution\n from jam and no jam case?")
-
-# sns.distplot(df[df[hue]==cat][col], ax=ax, hist=hist, kde=kde, rug=rug, label=cat, color=color)
-figsize = (10, 7)
-fig, ax = plt.subplots(figsize=figsize)
-format_spines(ax=ax, right_border=False)
 ax.set_title("Is there any relationship between Exit - ID distribution\n from jam and no jam case?", size=16)
 sns.kdeplot(df[df['Pass / Fail']=='0']['Exit - ID'], ax=ax, color='b', shade=True, Label='0')
 sns.kdeplot(df[df['Pass / Fail']=='1']['Exit - ID'], ax=ax, color='r', shade=True, Label='1')
+"""
+
+"""
+# Distribution of IDInfo_ID variable
+feature_name = 'IDInfo_ID'
+df[feature_name] = df[feature_name].replace('none', np.nan)
+df[feature_name] = df[feature_name].fillna(df[feature_name].median())
+
+print(f'Median value of {feature_name} : {df[feature_name].median()}')
+
+plot_distplot(df=df, col=feature_name, title="IDInfo_ID Distribution")
+
+ax.set_title("Is there any relationship between IDInfo_ID distribution\n from jam and no jam case?", size=16)
+sns.kdeplot(df[df['Pass / Fail']=='0'][feature_name], ax=ax, color='b', shade=True, Label='0')
+sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=True, Label='1')
+"""
+
+"""
+# Distribution of ID - Eos variable
+feature_name = 'ID - Eos'
+df[feature_name] = df[feature_name].replace('none', np.nan)
+df[feature_name] = df[feature_name].fillna(df[feature_name].median())
+
+print(f'Median value of {feature_name} : {df[feature_name].median()}')
+
+plot_distplot(df=df, col=feature_name, title="ID - Eos Distribution")
+
+ax.set_title("Is there any relationship between ID - Eos distribution\n from jam and no jam case?", size=16)
+sns.kdeplot(df[df['Pass / Fail']=='0'][feature_name], ax=ax, color='b', shade=True, Label='0')
+sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=True, Label='1')
+"""
+
+"""
+# Distribution of Exit - ID variable
+feature_name = 'Exit - ID'
+df[feature_name] = df[feature_name].replace('none', np.nan)
+df[feature_name] = df[feature_name].fillna(df[feature_name].median())
+
+print(f'Median value of {feature_name} : {df[feature_name].median()}')
+
+plot_distplot(df=df, col=feature_name, title="Exit - ID Distribution")
+
+ax.set_title("Is there any relationship between Exit - ID distribution\n from jam and no jam case?", size=16)
+sns.kdeplot(df[df['Pass / Fail']=='0'][feature_name], ax=ax, color='b', shade=True, Label='0')
+sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=True, Label='1')
+"""
+
+
+# Distribution of Del - Exit variable
+feature_name = 'Del - Exit'
+df[feature_name] = df[feature_name].replace('none', np.nan)
+# print(f'Missing value of {feature_name} : {df[feature_name].isna().sum()}, '
+#      f'None-NaN count : {df[feature_name].count()}')
+df[feature_name] = df[feature_name].fillna(df[feature_name].median())
+
+print(f'Median value of {feature_name} : {df[feature_name].median()}')
+
+plot_distplot(df=df, col=feature_name, title="Del - Exit Distribution")
+
+ax.set_title("Is there any relationship between Del - Exit distribution\n from jam and no jam case?", size=16)
+sns.kdeplot(df[df['Pass / Fail']=='0'][feature_name], ax=ax, color='b', shade=True, Label='0')
+# sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=True, Label='1')
+
 
 print(df)
-
 plt.show()
 
 
