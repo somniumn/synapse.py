@@ -83,7 +83,7 @@ plot_countplot(df=df, col='Pass / Fail', hue='Eos >> ID', label_names=jam_map, p
                title="Could Eos >> ID had some influence on Jam Error?")
 """
 
-"""
+
 # Countplot for EosFull
 eosfull_colors = ['lightskyblue', 'lightcoral']
 eosfull_map = {'10': '10', '20': '20'}
@@ -103,9 +103,15 @@ plot_double_donut_chart(df=df, col1='Pass / Fail', col2='Eos - Full', label_name
 # Distribution of EosVal variable
 plot_distplot(df=df, col='EosVal', title="EosVal Distribution")
 
-plot_distplot(df=df, col='EosVal', hue='Pass / Fail', kind='kde',
-              title="Is there any relationship between EosVal distribution\n from jam and no jam case?")
-"""
+# plot_distplot(df=df, col='EosVal', hue='Pass / Fail', kind='kde',
+#              title="Is there any relationship between EosVal distribution\n from jam and no jam case?")
+figsize = (10, 7)
+fig, ax = plt.subplots(figsize=figsize)
+format_spines(ax=ax, right_border=False)
+ax.set_title("Is there any relationship between EosVal distribution\n from jam and no jam case?", size=16)
+sns.kdeplot(df[df['Pass / Fail']=='0']['EosVal'], ax=ax, color='b', shade=True, Label='0')
+sns.kdeplot(df[df['Pass / Fail']=='1']['EosVal'], ax=ax, color='r', shade=True, Label='1')
+
 
 imputer = SimpleImputer(strategy='median')
 
@@ -115,10 +121,18 @@ df['Exit - ID'] = df['Exit - ID'].fillna(df['Exit - ID'].median())
 
 # df['Exit - ID'] = imputer.fit_transform(df['Exit - ID'])
 
-plot_distplot(df=df, col='Exit - ID', title="Exit - ID Distribution")
+plot_distplot(df=df, col='Exit - ID', title="Exit - ID Distribution", palette=['blue', 'orange'])
 
-plot_distplot(df=df, col='Exit - ID', hue='Pass / Fail', kind='kde',
-              title="Is there any relationship between Exit - ID distribution\n from jam and no jam case?")
+# plot_distplot(df=df, col='Exit - ID', hue='Pass / Fail', kind='kde', color=['r', 'g'],
+#              title="Is there any relationship between Exit - ID distribution\n from jam and no jam case?")
+
+# sns.distplot(df[df[hue]==cat][col], ax=ax, hist=hist, kde=kde, rug=rug, label=cat, color=color)
+figsize = (10, 7)
+fig, ax = plt.subplots(figsize=figsize)
+format_spines(ax=ax, right_border=False)
+ax.set_title("Is there any relationship between Exit - ID distribution\n from jam and no jam case?", size=16)
+sns.kdeplot(df[df['Pass / Fail']=='0']['Exit - ID'], ax=ax, color='b', shade=True, Label='0')
+sns.kdeplot(df[df['Pass / Fail']=='1']['Exit - ID'], ax=ax, color='r', shade=True, Label='1')
 
 print(df)
 
