@@ -11,7 +11,6 @@ from pycomp.viz.insights import *
 from pycomp.ml.transformers import FiltraColunas
 from pycomp.ml.transformers import EliminaDuplicatas
 from pycomp.ml.transformers import SplitDados
-from pycomp.ml.trainer import ClassificadorBinario
 
 # Project variables
 DATA_PATH = 'C:/Work/HP/dataset'
@@ -214,17 +213,36 @@ set_classifiers = {
     }
 }
 
-# Creating an object and starting training
-trainer = ClassificadorBinario()
-trainer.fit(set_classifiers, X_train, y_train, random_search=True, scoring='accuracy', cv=5,
-            verbose=-1, n_jobs=-1)
 
-# Analytical of training results
-y_test = y_test.astype('int64')
-metrics = trainer.evaluate_performance(X_train, y_train, X_test, y_test)
-print(metrics)
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.metrics import roc_curve, roc_auc_score, plot_confusion_matrix
+from sklearn.tree import export_graphviz
+import graphviz
+from IPython.display import display
+
+class_names = ['NoJam', 'Jam']
+trainer = RandomizedSearchCV(dtree, param_distributions=dtree_param_grid, scoring='accuracy', cv=5, verbose=1,
+                             n_iter=50, random_state=42)
+trainer.fit(X_train, y_train)
+model = trainer.best_estimator_
+
+pred = model.predict(X_test)
 
 # Graphical analysis of performance
-trainer.plot_metrics()
+plot_confusion_matrix(model, X_test, y_test, display_labels=class_names, cmap=plt.cm.Blues)
+
+os.environ["PATH"] += os.pathsep + 'C:/Program Files/Python38/Graphviz/bin'
+
+export_graphviz(model, out_file='tree.dot', class_names=class_names, feature_names=MODEL_FEATURES,
+                impurity=True, filled=True)
+
+with open('tree.dot') as file_reader:
+    dot_graph = file_reader.read()
+
+dot = graphviz.Source(dot_graph)
+dot.render(filename='tree.png')
+
+display(model)
+display(trainer.best_params_)
 
 plt.show()
