@@ -160,6 +160,8 @@ print(df_prep[TARGET])
 overview = data_overview(df=df_prep)
 print(overview)
 
+df_prep.to_csv('prep_dataset.csv')
+
 # Plotting a correlation matrix
 plot_corr_matrix(df=df_prep, corr='positive', corr_col='Pass / Fail',
                  title='Top Features - Correlation Positive by Pass / Fail')
@@ -252,7 +254,7 @@ class_names = ['NoJam', 'Jam']
 
 # DecisionTree
 trainer = RandomizedSearchCV(dtree, param_distributions=dtree_param_grid, scoring='accuracy', cv=5, verbose=1,
-                             n_iter=100, random_state=42)
+                             n_iter=100, random_state=42, n_jobs=-1)
 trainer.fit(X_train, y_train)
 dtree_model = trainer.best_estimator_
 
