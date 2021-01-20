@@ -161,7 +161,8 @@ overview = data_overview(df=df_prep)
 print(overview)
 
 # Plotting a correlation matrix
-plot_corr_matrix(df=df_prep, corr_col='Pass / Fail', title='Top Features - Correlation Positive by Pass / Fail')
+plot_corr_matrix(df=df_prep, corr='positive', corr_col='Pass / Fail',
+                 title='Top Features - Correlation Positive by Pass / Fail')
 
 
 # Generating objects
@@ -214,6 +215,33 @@ set_classifiers = {
 }
 
 
+def visualize_classifier(model, X, y, ax=None, cmap='rainbow'):
+    ax = ax or plt.gca()
+
+    # Plot the training points
+    ax.scatter(X[:, 0], X[:, 1], c=y, s=30, cmap=cmap,
+               clim=(y.min(), y.max()), zorder=3)
+    ax.axis('tight')
+    ax.axis('off')
+    xlim = ax.get_xlim()
+    ylim = ax.get_ylim()
+
+    # fit the estimator
+    model.fit(X, y)
+    xx, yy = np.meshgrid(np.linspace(*xlim, num=200),
+                         np.linspace(*ylim, num=200))
+    Z = model.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+
+    # Create a color plot with the results
+    n_classes = len(np.unique(y))
+    contours = ax.contourf(xx, yy, Z, alpha=0.3,
+                           levels=np.arange(n_classes + 1) - 0.5,
+                           cmap=cmap, clim=(y.min(), y.max()),
+                           zorder=1)
+
+    ax.set(xlim=xlim, ylim=ylim)
+
+
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.metrics import roc_curve, roc_auc_score, plot_confusion_matrix
 from sklearn.tree import export_graphviz
@@ -221,19 +249,21 @@ import graphviz
 from IPython.display import display
 
 class_names = ['NoJam', 'Jam']
-trainer = RandomizedSearchCV(dtree, param_distributions=dtree_param_grid, scoring='accuracy', cv=5, verbose=1,
-                             n_iter=50, random_state=42)
-trainer.fit(X_train, y_train)
-model = trainer.best_estimator_
 
-pred = model.predict(X_test)
+# DecisionTree
+trainer = RandomizedSearchCV(dtree, param_distributions=dtree_param_grid, scoring='accuracy', cv=5, verbose=1,
+                             n_iter=100, random_state=42)
+trainer.fit(X_train, y_train)
+dtree_model = trainer.best_estimator_
+
+pred = dtree_model.predict(X_test)
 
 # Graphical analysis of performance
-plot_confusion_matrix(model, X_test, y_test, display_labels=class_names, cmap=plt.cm.Blues)
+plot_confusion_matrix(dtree_model, X_test, y_test, display_labels=class_names, cmap=plt.cm.Blues)
 
 os.environ["PATH"] += os.pathsep + 'C:/Program Files/Python38/Graphviz/bin'
 
-export_graphviz(model, out_file='tree.dot', class_names=class_names, feature_names=MODEL_FEATURES,
+export_graphviz(dtree_model, out_file='tree.dot', class_names=class_names, feature_names=MODEL_FEATURES,
                 impurity=True, filled=True)
 
 with open('tree.dot') as file_reader:
@@ -242,7 +272,35 @@ with open('tree.dot') as file_reader:
 dot = graphviz.Source(dot_graph)
 dot.render(filename='tree.png')
 
-display(model)
+display(dtree_model)
 display(trainer.best_params_)
 
+# RandomForest
+trainer = RandomizedSearchCV(forest, param_distributions=forest_param_grid, scoring='accuracy', cv=5, verbose=1,
+                             n_iter=50, random_state=42, n_jobs=-1)
+
+trainer.fit(X_train, y_train)
+forest_model = trainer.best_estimator_
+
+pred = forest_model.predict(X_test)
+
+
+# Graphical analysis of performance
+plot_confusion_matrix(forest_model, X_test, y_test, display_labels=class_names, cmap=plt.cm.Blues)
+"""
+export_graphviz(forest_model, out_file='forest.dot', class_names=class_names, feature_names=MODEL_FEATURES,
+               impurity=True, filled=True)
+
+with open('forest.dot') as file_reader:
+    dot_graph = file_reader.read()
+
+dot = graphviz.Source(dot_graph)
+dot.render(filename='forest.png')
+"""
+display(forest_model)
+display(trainer.best_params_)
+# visualize_classifier(forest_model, X_train, y_train)
+
 plt.show()
+
+
