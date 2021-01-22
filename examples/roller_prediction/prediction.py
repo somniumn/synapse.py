@@ -5,18 +5,19 @@ from pysynapse.gme import GaussianMixtureEstimator
 
 # Project variables
 DATA_PATH = 'C:/Work/HP/dataset'
-TRAIN_FILENAME = 'Fin_H2-6703.csv'
-# TEST_FILENAME = 'test.csv'
+TRAIN_FILENAME = 'Topaz-P2_50001-52000.txt'
 
 # Reading training data
-df = pd.read_csv(os.path.join(DATA_PATH, TRAIN_FILENAME))
+df = pd.read_csv(os.path.join(DATA_PATH, TRAIN_FILENAME), names=['Timing'])
 df.head()
 
-df_sample = pd.DataFrame(df, columns=['IDInfo Time'])
-df_sample.head()
+print(df)
+
 gme = GaussianMixtureEstimator(no_clusters=3, use_kmeans_init=True)
-mean, var, prop = gme.fit(df_sample)
+mean, var, prop = gme.fit(df)
 
 print(mean)
 print(var)
 print(prop)
+
+mean

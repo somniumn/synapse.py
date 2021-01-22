@@ -1,16 +1,20 @@
 import pandas as pd
 import numpy as np
+from IPython.display import display
 from sklearn.pipeline import Pipeline
-from sklearn.impute import SimpleImputer
-from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.metrics import roc_curve, roc_auc_score, plot_confusion_matrix
+from sklearn.tree import export_graphviz
 import os
 from pycomp.viz.insights import *
 from pycomp.ml.transformers import FiltraColunas
 from pycomp.ml.transformers import EliminaDuplicatas
 from pycomp.ml.transformers import SplitDados
+import graphviz
+
 
 # Project variables
 DATA_PATH = 'C:/Work/HP/dataset'
@@ -126,30 +130,6 @@ print(overview)
 num_features = [col for col, dtype in X_train.dtypes.items() if dtype != 'object']
 cat_features = [col for col, dtype in X_train.dtypes.items() if dtype == 'object']
 
-"""
-# Straining it DataFrames for testing
-X_train_num = X_train[num_features]
-X_train_cat = X_train[cat_features]
-
-print(f'Attribute numerical:\n{num_features}')
-print(f'\nAttribute categorical:\n{cat_features}')
-
-# Building a complete pipeline
-prep_pipeline = ColumnTransformer([
-    ('num', num_pipeline, num_features),
-    ('cat', cat_pipeline, cat_features)
-])
-
-# Applying the prep pipeline
-X_train_prep = prep_pipeline.fit_transform(X_train)
-X_test_prep = prep_pipeline.fit_transform(X_test)
-print(f'Shape of X_train_prep: {X_train_prep.shape}')
-
-# Building a final set of features
-cat_encoded_features = prep_pipeline.named_transformers_['cat'].named_steps['encoder'].features_after_encoding
-MODEL_FEATURES = num_features + cat_encoded_features
-print(f'Total features (must be equal to {X_train_prep.shape[1]}): {len(MODEL_FEATURES)}')
-"""
 # Preparing a final DataFrame after transformation
 MODEL_FEATURES = num_features + cat_features
 print(f'Total features (must be equal to {X_train.shape[1]}): {len(MODEL_FEATURES)}')
@@ -216,40 +196,6 @@ set_classifiers = {
     }
 }
 
-
-def visualize_classifier(model, X, y, ax=None, cmap='rainbow'):
-    ax = ax or plt.gca()
-
-    # Plot the training points
-    ax.scatter(X[:, 0], X[:, 1], c=y, s=30, cmap=cmap,
-               clim=(y.min(), y.max()), zorder=3)
-    ax.axis('tight')
-    ax.axis('off')
-    xlim = ax.get_xlim()
-    ylim = ax.get_ylim()
-
-    # fit the estimator
-    model.fit(X, y)
-    xx, yy = np.meshgrid(np.linspace(*xlim, num=200),
-                         np.linspace(*ylim, num=200))
-    Z = model.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
-
-    # Create a color plot with the results
-    n_classes = len(np.unique(y))
-    contours = ax.contourf(xx, yy, Z, alpha=0.3,
-                           levels=np.arange(n_classes + 1) - 0.5,
-                           cmap=cmap, clim=(y.min(), y.max()),
-                           zorder=1)
-
-    ax.set(xlim=xlim, ylim=ylim)
-
-
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.metrics import roc_curve, roc_auc_score, plot_confusion_matrix
-from sklearn.tree import export_graphviz
-import graphviz
-from IPython.display import display
-
 class_names = ['NoJam', 'Jam']
 
 # DecisionTree
@@ -286,22 +232,11 @@ forest_model = trainer.best_estimator_
 
 pred = forest_model.predict(X_test)
 
-
 # Graphical analysis of performance
 plot_confusion_matrix(forest_model, X_test, y_test, display_labels=class_names, cmap=plt.cm.Blues)
-"""
-export_graphviz(forest_model, out_file='forest.dot', class_names=class_names, feature_names=MODEL_FEATURES,
-               impurity=True, filled=True)
 
-with open('forest.dot') as file_reader:
-    dot_graph = file_reader.read()
-
-dot = graphviz.Source(dot_graph)
-dot.render(filename='forest.png')
-"""
 display(forest_model)
 display(trainer.best_params_)
 # visualize_classifier(forest_model, X_train, y_train)
 
 plt.show()
-
