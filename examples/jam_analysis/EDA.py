@@ -185,7 +185,6 @@ sns.kdeplot(df[df['Pass / Fail']=='0'][feature_name], ax=ax, color='b', shade=Tr
 sns.kdeplot(df[df['Pass / Fail']=='1'][feature_name], ax=ax, color='r', shade=True, Label='1')
 
 
-
 # print(df[df['Pass / Fail']=='0'][feature_name].count())
 # pd.set_option('display.max_rows', 500)
 # print(df[df['Pass / Fail']=='0'][feature_name])

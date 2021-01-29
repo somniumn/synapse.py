@@ -1,3 +1,4 @@
+from pycomp.viz.insights import plot_corr_matrix
 from sklearn.datasets.samples_generator import make_blobs
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -14,15 +15,24 @@ from matplotlib import pyplot as plt
 from matplotlib.patches import Ellipse
 import seaborn as sns
 from tensorflow import metrics
+import os
 
 
 # data load and split training set / test set
-data_set = pd.read_csv('C:/Work/Kaggle/dataset/hp/citrine_nn_trc_dataset.csv')
+DATA_PATH = 'C:/Work/HP/dataset'
+TRAIN_FILENAME = 'citrine_nn_trc_dataset.csv'
+
+# Reading training data
+data_set = pd.read_csv(os.path.join(DATA_PATH, TRAIN_FILENAME))
+data_set.head()
+
+# print(data_set)
 X = data_set.iloc[:, 1:data_set.shape[1]-1]
 y = data_set['ClassBinary']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
 
 class_names = ['NotNecessary', 'ShouldDo']
+
 
 # print(X_train)
 
@@ -34,13 +44,18 @@ X_train_A = X_train.iloc[:, [3]]
 X_train_B = X_train.iloc[:, [2]]
 X_train_AB = pd.concat([X_train_A, X_train_B], axis=1)
 X_train_C = X_train.iloc[:, 1:9]
-print(X_train_C)
+X_train_C = pd.concat([X_train_C, X_train.iloc[:, [101]]], axis=1)
+XY_Train = pd.concat([X_train_C, y_train], axis=1)
+print(XY_Train)
 
 plt.figure(1)
 # corr = X_train_AB.corr(method='pearson').style.background_gradient(cmap='coolwarm', axis=None).set_precision(2)
-corr = X_train_C.corr(method='pearson')
+corr = XY_Train.corr(method='pearson')
 sns.heatmap(corr, annot=True, cmap='coolwarm')
 
+# Plotting a correlation matrix
+plot_corr_matrix(df=XY_Train, corr='positive', corr_col='ClassBinary',
+                 title='Top Features - Correlation Positive by ClassBinary')
 
 plt.figure(2)
 indicesToKeep = y_train
@@ -50,6 +65,7 @@ plt.grid()
 
 
 X_test_C = X_test.iloc[:, 1:9]
+X_test_C = pd.concat([X_test_C, X_test.iloc[:, [101]]], axis=1)
 # decision tree
 classifier = xgb.XGBClassifier(n_estimators=500, learning_rate=0.1, max_depth=4)
 # classifier.fit(X_train, y_train)
