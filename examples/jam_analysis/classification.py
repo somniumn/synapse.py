@@ -5,8 +5,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import RandomizedSearchCV, train_test_split
 from sklearn.metrics import roc_curve, roc_auc_score, plot_confusion_matrix
+from sklearn.metrics import roc_curve, roc_auc_score, plot_confusion_matrix, accuracy_score, precision_score, \
+    recall_score
 from sklearn.tree import export_graphviz
 import os
 from pycomp.viz.insights import *
@@ -105,6 +107,7 @@ print(f'Total of duplicates after: {df_nodup.duplicated().sum()}')
 # Applying transformer
 splitter = SplitDados(target=TARGET)
 X_train, X_test, y_train, y_test = splitter.fit_transform(df_nodup)
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=42)
 
 # Results
 print(f'Shape of X_train: {X_train.shape}')
@@ -223,6 +226,11 @@ dot.render(filename='tree.png')
 display(dtree_model)
 display(trainer.best_params_)
 
+print("Just Decision Tree")
+print("accuracy_score: {}".format(accuracy_score(y_test, pred)))
+# print("precision_score: {}".format(precision_score(y_test, pred)))
+# print("recall_score: {}".format(recall_score(y_test, pred)))
+
 # RandomForest
 trainer = RandomizedSearchCV(forest, param_distributions=forest_param_grid, scoring='accuracy', cv=5, verbose=1,
                              n_iter=50, random_state=42, n_jobs=-1)
@@ -230,7 +238,7 @@ trainer = RandomizedSearchCV(forest, param_distributions=forest_param_grid, scor
 trainer.fit(X_train, y_train)
 forest_model = trainer.best_estimator_
 
-pred = forest_model.predict(X_test)
+predict = forest_model.predict(X_test)
 
 # Graphical analysis of performance
 plot_confusion_matrix(forest_model, X_test, y_test, display_labels=class_names, cmap=plt.cm.Blues)
@@ -238,5 +246,10 @@ plot_confusion_matrix(forest_model, X_test, y_test, display_labels=class_names, 
 display(forest_model)
 display(trainer.best_params_)
 # visualize_classifier(forest_model, X_train, y_train)
+
+print("Random Forest")
+print("accuracy_score: {}".format(accuracy_score(y_test, predict)))
+# print("precision_score: {}".format(precision_score(y_test, predict)))
+# print("recall_score: {}".format(recall_score(y_test, predict)))
 
 plt.show()
